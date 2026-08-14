@@ -3,6 +3,9 @@ const config = require("../../config/config");
 const authRoute = require("./auth.routes");
 const userRoute = require("./user.routes");
 const docsRoute = require("./docs.routes");
+const doctorRoute = require("./doctor.routes");
+const patientRoute = require("./patient.routes");
+const dashboardRoute = require("./dashboard.routes");
 
 
 const router = express.Router();
@@ -16,6 +19,9 @@ const defaultRoutes = [
     path: "/users",
     route: userRoute,
   },
+  { path: "/doctors", route: doctorRoute },
+  { path: "/patients", route: patientRoute },
+  { path: "/dashboard", route: dashboardRoute },
  
 ];
 

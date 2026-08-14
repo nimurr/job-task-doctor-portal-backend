@@ -1,0 +1,14 @@
+const httpStatus = require("http-status");
+const catchAsync = require("../utils/catchAsync");
+const response = require("../config/response");
+const { doctorService, patientService } = require("../services");
+const pick = require("../utils/pick");
+const send = (res, statusCode, message, data) => res.status(statusCode).json(response({ statusCode, message, data }));
+const imagePath = (file) => file && `/uploads/doctors/${file.filename}`;
+const createDoctor = catchAsync(async (req, res) => send(res, httpStatus.CREATED, "Doctor created", await doctorService.createDoctor({ ...req.body, ...(imagePath(req.file) && { image: imagePath(req.file) }) })));
+const getDoctors = catchAsync(async (req, res) => send(res, httpStatus.OK, "Doctors retrieved", await doctorService.queryDoctors(pick(req.query, ["search", "specialization", "hospital", "isActive", "fromDate", "toDate"]), pick(req.query, ["sortBy", "limit", "page"]))));
+const getDoctor = catchAsync(async (req, res) => { const doctor = await doctorService.getDoctorById(req.params.doctorId); if (!doctor) return send(res, httpStatus.NOT_FOUND, "Doctor not found", {}); return send(res, httpStatus.OK, "Doctor retrieved", doctor); });
+const updateDoctor = catchAsync(async (req, res) => send(res, httpStatus.OK, "Doctor updated", await doctorService.updateDoctorById(req.params.doctorId, { ...req.body, ...(imagePath(req.file) && { image: imagePath(req.file) }) })));
+const deleteDoctor = catchAsync(async (req, res) => { await doctorService.deleteDoctorById(req.params.doctorId); return send(res, httpStatus.OK, "Doctor deleted", {}); });
+const getDoctorPatients = catchAsync(async (req, res) => send(res, httpStatus.OK, "Doctor patients retrieved", await patientService.queryPatients({ ...pick(req.query, ["search", "status", "condition", "isActive", "fromDate", "toDate"]), doctor: req.params.doctorId }, pick(req.query, ["sortBy", "limit", "page"]))));
+module.exports = { createDoctor, getDoctors, getDoctor, updateDoctor, deleteDoctor, getDoctorPatients };

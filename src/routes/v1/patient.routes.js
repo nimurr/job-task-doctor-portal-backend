@@ -1,0 +1,10 @@
+const express = require("express");
+const auth = require("../../middlewares/auth");
+const validate = require("../../middlewares/validate");
+const upload = require("../../middlewares/fileUpload")("./public/uploads/patients");
+const patientValidation = require("../../validations/patient.validation");
+const patientController = require("../../controllers/patient.controller");
+const router = express.Router();
+router.route("/").post(auth("commonAdmin"), upload.single("image"), validate(patientValidation.createPatient), patientController.createPatient).get(auth("commonAdmin"), validate(patientValidation.getPatients), patientController.getPatients);
+router.route("/:patientId").get(auth("commonAdmin"), validate(patientValidation.patientId), patientController.getPatient).patch(auth("commonAdmin"), upload.single("image"), validate(patientValidation.updatePatient), patientController.updatePatient).delete(auth("commonAdmin"), validate(patientValidation.patientId), patientController.deletePatient);
+module.exports = router;
