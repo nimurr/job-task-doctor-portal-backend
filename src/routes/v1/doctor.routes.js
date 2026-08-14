@@ -6,6 +6,7 @@ const doctorValidation = require("../../validations/doctor.validation");
 const doctorController = require("../../controllers/doctor.controller");
 const router = express.Router();
 router.route("/").post(auth("commonAdmin"), upload.single("image"), validate(doctorValidation.createDoctor), doctorController.createDoctor).get(auth("commonAdmin"), validate(doctorValidation.getDoctors), doctorController.getDoctors);
+router.route("/:doctorId/details").get(auth("commonAdmin"), validate(doctorValidation.doctorId), doctorController.getDoctorDetails);
 router.route("/:doctorId/patients").get(auth("commonAdmin"), validate(doctorValidation.doctorId), doctorController.getDoctorPatients);
 router.route("/:doctorId").get(auth("commonAdmin"), validate(doctorValidation.doctorId), doctorController.getDoctor).patch(auth("commonAdmin"), upload.single("image"), validate(doctorValidation.updateDoctor), doctorController.updateDoctor).delete(auth("commonAdmin"), validate(doctorValidation.doctorId), doctorController.deleteDoctor);
 module.exports = router;

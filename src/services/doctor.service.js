@@ -32,4 +32,12 @@ const deleteDoctorById = async (id) => {
   if (patientCount) throw new ApiError(httpStatus.CONFLICT, "Reassign or delete this doctor's patients before deleting the doctor");
   await doctor.deleteOne(); return doctor;
 };
-module.exports = { createDoctor, queryDoctors, getDoctorById, updateDoctorById, deleteDoctorById };
+
+const getDoctorWithPatients = async (id) => {
+  const doctor = await getDoctorById(id);
+  if (!doctor) throw new ApiError(httpStatus.NOT_FOUND, "Doctor not found");
+  const patients = await Patient.find({ doctor: id, isActive: true }).select("-__v");
+  return { doctor, patients };
+};
+
+module.exports = { createDoctor, queryDoctors, getDoctorById, updateDoctorById, deleteDoctorById, getDoctorWithPatients };
