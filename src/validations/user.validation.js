@@ -36,7 +36,7 @@ const updateUser = {
       lastName: Joi.string(),
       fullName: Joi.string(),
       // email: Joi.string().email(),
-      phoneNumber: Joi.string(),
+      phoneNumber: Joi.number().integer().positive(),
       callingCode: Joi.string(),
       nidNumber: Joi.string(),
       dataOfBirth: Joi.string(),
