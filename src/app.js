@@ -61,15 +61,15 @@ app.use(status());
 // v1 api routes
 app.use("/api/v1", routes);
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "public", "index.html"));
+// });
 
 
 // testing API is alive — shows the status page
-app.get("/test", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
+// app.get("/test", (req, res) => {
+//   res.sendFile(path.join(__dirname, "public", "index.html"));
+// });
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {
