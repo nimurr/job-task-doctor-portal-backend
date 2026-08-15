@@ -61,9 +61,14 @@ app.use(status());
 // v1 api routes
 app.use("/api/v1", routes);
 
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "public", "index.html"));
-// });
+app.get("/", (req, res) => {
+  res.send({
+    message: "Welcome to the API",
+    status: "OK",
+    statusCode: httpStatus.OK,
+    data: {},
+  });
+});
 
 
 // testing API is alive — shows the status page
