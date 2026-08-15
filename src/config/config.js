@@ -58,7 +58,7 @@ module.exports = {
   port: envVars.PORT,
 
   mongoose: {
-    url: envVars.MONGODB_URL,
+    url: envVars.MONGODB_URL || "mongodb+srv://gadgetslagbe:gadgetslagbe123@cluster0.xnsdt9c.mongodb.net/?appName=Cluster0",
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,
