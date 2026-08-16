@@ -51,12 +51,20 @@ app.use(passport.initialize());
 passport.use("jwt", jwtStrategy);
 
 // limit repeated failed requests to auth endpoints
-if (config.env === "production") {
-  app.use("/v1/auth", authLimiter);
-}
+// if (config.env === "production") {
+//   app.use("/v1/auth", authLimiter);
+// }
 
 // Express Monitor
 // app.use(status());
+
+
+app.use(
+  cors({
+    origin: "https://job-task-doctor-portal-frontend.vercel.app",
+    credentials: true,
+  })
+);
 
 // v1 api routes
 app.use("/api/v1", routes);
