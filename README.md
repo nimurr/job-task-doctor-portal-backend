@@ -124,19 +124,4 @@ This project is licensed under the **ISC License**.
 
 ---
 
-## 🤝 Contribution
-
-Feel free to fork this repository and submit pull requests.
-
----
-
-## 📧 Contact
-
-**Authors**: [Md. Shadat Hossain](mailto:shadathossan3500@gmail.com) & Sahinur Islam
-
-If you have any questions, feel free to reach out!
-
----
-
-### 🌟 Star the repo if you like it! ⭐
 
