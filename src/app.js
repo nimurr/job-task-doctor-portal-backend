@@ -56,7 +56,7 @@ if (config.env === "production") {
 }
 
 // Express Monitor
-app.use(status());
+// app.use(status());
 
 // v1 api routes
 app.use("/api/v1", routes);
