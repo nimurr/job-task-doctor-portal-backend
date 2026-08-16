@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "build": "webpack --mode=production",
-    "start": "node dist/bundle.js",
+    "start": "nodemon src/index.js",
     "seed": "node src/utils/seeder.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
