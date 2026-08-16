@@ -8,8 +8,8 @@ const { tokenTypes } = require("../config/tokens");
 
 const loginUserWithEmailAndPassword = async (email, password, fcmToken) => {
   const user = await userService?.getUserByEmail(email);
-  if (!user || !(await user.isPasswordMatch(password))) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, "Incorrect email or password");
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
   }
   user.fcmToken = fcmToken;
   await user.save();
